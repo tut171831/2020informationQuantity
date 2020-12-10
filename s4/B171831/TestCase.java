@@ -48,6 +48,31 @@ public class TestCase {
 
 	    // Write your testCase here
 
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("H".getBytes());
+	    freq = myObject.frequency();
+	    if(1 != freq) {System.out.println("frequency() for nothing target, should return 1, when target is H. But it returns "+freq); c++; }
+
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("".getBytes());
+	    freq = myObject.frequency();
+	    if(-1 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return -1, when target is nothing. But it returns "+freq); c++; }
+
+	    myObject.setSpace("".getBytes());
+	    myObject.setTarget("H".getBytes());
+	    freq = myObject.frequency();
+	    if(0 != freq) {System.out.println("frequency() for nothing target, should return 1, when target is H. But it returns "+freq); c++; }
+
+	    myObject.setSpace("".getBytes());
+	    myObject.setTarget("".getBytes());
+	    freq = myObject.frequency();
+	    if(0 < freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return -1, when target is nothing. But it returns "+freq); c++; }
+
+	    myObject.setSpace(null);
+	    myObject.setTarget(null);
+	    freq = myObject.frequency();
+	    if(0 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return -1, when target is nothing. But it returns "+freq); c++; }
+
 	}
 	catch(Exception e) {
 	    System.out.println("Exception occurred in Frequencer Object");
