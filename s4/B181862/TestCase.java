@@ -47,6 +47,54 @@ public class TestCase {
 	    if(4 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return 4, when taget is H. But it returns "+freq); c++; }
 
 	    // Write your testCase here
+	    
+	    // Black Box    
+	    // testCase1: when TARGET's length is zero
+	    myObject = new Frequencer();
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("".getBytes());
+	    freq = myObject.frequency();
+	    if(-1 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return -1, when target's length is zero. But it returns "+freq); c++; }
+	    	        
+	    // testCase2: when SPACE's length is zero
+	    myObject = new Frequencer();
+	    myObject.setSpace("".getBytes());
+	    myObject.setTarget("H".getBytes());
+	    freq = myObject.frequency();
+	    if(0 != freq) {System.out.println("frequency() for case that space's length is zero, should return 0, when taget is H. But it returns "+freq); c++; }
+
+	    // testCase3: when TARGET includes more than 1 character
+	    myObject = new Frequencer();
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("Hi Ho".getBytes());
+	    freq = myObject.frequency();
+	    if(2 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return 2, when taget is Hi_Ho. But it returns "+freq); c++; }
+	  
+	    
+	    // White Box
+	    // testCase1: when SPACE and TARGET are duplicate strings
+	    myObject = new Frequencer();
+	    myObject.setSpace("HHHH".getBytes());
+	    myObject.setTarget("HH".getBytes());
+	    try {
+	    	freq = myObject.frequency();
+	    	if(3 != freq) {System.out.println("frequency() for HHHH, should return 3, when taget is HH. But it returns "+freq); c++; }
+	    } catch(Exception e) {
+	    	System.out.println("Exception occurred when space and target are duplicate strings");
+	    	c++;
+	    }
+	    
+	    // testCase2: when SPACE's length is shorter than TARGET's length
+	    myObject = new Frequencer();
+	    myObject.setSpace("H".getBytes());
+	    myObject.setTarget("HH".getBytes());
+	    try {
+	        freq = myObject.frequency();
+	    	if(0 != freq) {System.out.println("frequency() for H, should return 0, when taget is HH. But it returns "+freq); c++; }
+	    } catch(Exception e) {
+	    	System.out.println("Exception occurred when space's length is shorter than target's length");
+	    	c++;
+	    }
 
 	}
 	catch(Exception e) {
