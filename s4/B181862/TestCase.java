@@ -120,6 +120,32 @@ public class TestCase {
 	    myObject.setTarget("00".getBytes());
 	    value = myObject.estimation();
 	    if((value < 3.9999) || (4.0001 <value)) { System.out.println("IQ for 00 in 3210321001230123 should be 4.0. But it returns "+value); c++; }
+	    
+	    // testCase1:
+	    myObject = new InformationEstimator();
+	    myObject.setSpace("3210321001230123".getBytes());
+	    myObject.setTarget("012".getBytes());
+	    value = myObject.estimation();
+	    if((value < 2.9999) || (3.0001 <value)) { System.out.println("IQ for 012 in 3210321001230123 should be 3.0. But it returns "+value); c++; }
+	    
+	    // testCase2: when TARGET's length is zero
+	    myObject = new InformationEstimator();
+	    myObject.setSpace("3210321001230123".getBytes());
+	    myObject.setTarget("".getBytes());
+	    value = myObject.estimation();
+	    if((value < -0.0001) || (0.0001 <value)) { System.out.println("IQ when target's length is zero in 3210321001230123 should be 0.0. But it returns "+value); c++; }
+	    
+	    // testCase3: when SPACE is not set
+	    myObject = new InformationEstimator();
+	    myObject.setTarget("0".getBytes());
+	    try {
+	    	value = myObject.estimation();
+	    	if((value < Double.MAX_VALUE-0.0001) || (Double.MAX_VALUE+0.0001 <value)) { System.out.println("IQ for 0 when space is not set should be Double.MAX_VALUE. But it returns "+value); c++; }
+	    } catch(Exception e) {
+	    	System.out.println("Exception occurred when space is not set");
+	    	c++;
+	    }
+	    
 	}
 	catch(Exception e) {
 	    System.out.println("Exception occurred in InformationEstimator Object");
