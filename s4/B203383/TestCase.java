@@ -46,8 +46,24 @@ public class TestCase {
 	    freq = myObject.frequency();		    
 	    if(4 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return 4, when taget is H. But it returns "+freq); c++; }
 
-        // Write your testCase here
+		// Write your testCase here
+		//black box
+		myObject = new Frequencer();
+		freq = myObject.frequency();
+		if(-1 != freq){System.out.println("frequency(), should return -1, when taget is not set. But it is returns "+freq); c++;}
+		myObject.setTarget("T".getBytes());
+		freq = myObject.frequency();
+		if(0 != freq){System.out.println("frequency(), should return 0, when space is not set. But it is returns "+freq); c++;}
+		myObject.setSpace("Testcase".getBytes());
+		freq = myObject.frequency();
+		if(1 != freq){System.out.println("frequency() for Testcase, should return 1, when target T. But it returns "+freq); c++;}
 
+       // white box
+		myObject = new Frequencer();
+		myObject.setSpace("A".getBytes());
+		myObject.setTarget("ABC".getBytes());
+		freq = myObject.frequency();
+		if(0 != freq){System.out.println("frequency() for A, should return 0, when target ABC. But it returns  "+freq); c++;}
 
 
 
