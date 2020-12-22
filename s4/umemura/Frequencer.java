@@ -1,4 +1,4 @@
-package s4.umemura;  // ここは、かならず、自分の名前に変えよ。
+package s4.B171831;  // ここは、かならず、自分の名前に変えよ。
 import java.lang.*;
 import s4.specification.*;
 
@@ -71,8 +71,29 @@ public class Frequencer implements FrequencerInterface{
         // if suffix_i = suffix_j, it returns 0;   
 
         // ここにコードを記述せよ 
-        //                                          
-        return 0; // この行は変更しなければいけない。 
+        
+        int spaceLength = mySpace.length;
+
+        if(i == j){return 0;}
+
+        else if(i > j){
+            for(i; i < spaceLength; i++) {
+            if(mySpace[i] == mySpace[j]){ j++;}
+            else if(mySpace[i] > mySpace[j]) {return 1;}
+            else if(mySpace[i] < mySpace[j]) {return -1;}
+            else return -1;
+            }
+        }
+        else if(i < j){
+            for(j; j < spaceLength; j++) {
+                if(mySpace[i] == mySpace[j]){ i++;}
+                else if(mySpace[i] > mySpace[j]) {return 1;}
+                else if(mySpace[i] < mySpace[j]) {return -1;}
+                else return 1;
+            }
+        }
+        
+        //return 0; // この行は変更しなければいけない。 
     }
 
     public void setSpace(byte []space) { 
@@ -100,6 +121,15 @@ public class Frequencer implements FrequencerInterface{
         //   suffixArray[ 1]= 1:BA
         //   suffixArray[ 2]= 0:CBA
         // のようになるべきである。
+        for (int j = 0; j < space.length - 1; j++){
+            for (int k = 0; k < space.length - 1; k >j; k--){
+                if(suffixCompare(int suffixArray[k-1], int suffixArray[k]) == 0){
+                    int tmp = array[k - 1];
+                    array[k - 1] = array[k];
+                    array[k] = tmp;
+                }
+            }
+        }
     }
 
     // ここから始まり、指定する範囲までは変更してはならないコードである。
