@@ -121,6 +121,16 @@ public class Frequencer implements FrequencerInterface{
         //   suffixArray[ 1]= 1:BA
         //   suffixArray[ 2]= 0:CBA
         // のようになるべきである。
+	for (int j = 0; j < space.length - 1; j++){
+            for (int k = 0; k < space.length - 1; k >j; k--){
+                if(suffixCompare(int suffixArray[k-1], int suffixArray[k]) == 0){
+                    int tmp = array[k - 1];
+                    array[k - 1] = array[k];
+                    array[k] = tmp;
+                }
+            }
+        }
+
     }
 
     // ここから始まり、指定する範囲までは変更してはならないコードである。
