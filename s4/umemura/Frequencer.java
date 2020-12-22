@@ -299,4 +299,3 @@ public class Frequencer implements FrequencerInterface{
         }
     }
 }
-
