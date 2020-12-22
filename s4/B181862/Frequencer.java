@@ -72,26 +72,12 @@ public class Frequencer implements FrequencerInterface{
 
         // ここにコードを記述せよ 
         
-	int spaceLength = mySpace.length;
-
-        if(i == j){return 0;}
-
-        else if(i > j){
-            for(i; i < spaceLength; i++) {
-		    if(mySpace[i] == mySpace[j]){ j++;}
-		    else if(mySpace[i] > mySpace[j]) {return 1;}
-		    else if(mySpace[i] < mySpace[j]) {return -1;}
-		    else return -1;
-            }
-        }
-        else if(i < j){
-            for(j; j < spaceLength; j++) {
-                if(mySpace[i] == mySpace[j]){ i++;}
-                else if(mySpace[i] > mySpace[j]) {return 1;}
-                else if(mySpace[i] < mySpace[j]) {return -1;}
-                else return 1;
-            }
-        }
+        if (i == mySpace.length && j == mySpace.length) return 0;
+        else if (i == mySpace.length) return -1;
+	else if (j == mySpace.length) return 1;
+	else if (mySpace[i] > mySpace[j]) return 1;
+	else if (mySpace[i] < mySpace[j]) return -1;
+	else return suffixCompare(i+1, j+1);
 
         // return 0; // この行は変更しなければいけない。 
     }
@@ -121,12 +107,13 @@ public class Frequencer implements FrequencerInterface{
         //   suffixArray[ 1]= 1:BA
         //   suffixArray[ 2]= 0:CBA
         // のようになるべきである。
-	for (int j = 0; j < space.length - 1; j++){
-            for (int k = 0; k < space.length - 1; k >j; k--){
-                if(suffixCompare(int suffixArray[k-1], int suffixArray[k]) == 0){
-                    int tmp = array[k - 1];
-                    array[k - 1] = array[k];
-                    array[k] = tmp;
+
+	for (int j = 0; j < space.length-1; j++){
+            for (int k = space.length-1; k > j; k--){
+                if(suffixCompare(suffixArray[k-1], suffixArray[k]) == 1){
+                    int tmp = suffixArray[k-1];
+                    suffixArray[k-1] = suffixArray[k];
+                    suffixArray[k] = tmp;
                 }
             }
         }
@@ -207,7 +194,6 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここに比較のコードを書け 
         //
-        return 0; // この行は変更しなければならない。
     }
 
 
