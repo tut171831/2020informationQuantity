@@ -71,22 +71,29 @@ public class Frequencer implements FrequencerInterface{
         // if suffix_i = suffix_j, it returns 0;   
 
         // ここにコードを記述せよ 
-        int spaceLength = mySpace.lenghth;
-        if (i=j) return 0;
-        else if (i>j){
-        	for (i; i < spaceLength; i++) {
-        		if(mySpace[i] == mySpace[j]) {j++;}
-        		else if (mySpace[i] > myspace[j]) return 1;
-        		else if (mySpace[i] < myspace[j]) return -1;
-        		else return -1;
-        	}
+        
+	int spaceLength = mySpace.length;
+
+        if(i == j){return 0;}
+
+        else if(i > j){
+            for(i; i < spaceLength; i++) {
+		    if(mySpace[i] == mySpace[j]){ j++;}
+		    else if(mySpace[i] > mySpace[j]) {return 1;}
+		    else if(mySpace[i] < mySpace[j]) {return -1;}
+		    else return -1;
+            }
         }
         else if(i < j){
-        	for(j; j < spaceLength; j++) {
-        		if(mySpace[i] == mySpace
+            for(j; j < spaceLength; j++) {
+                if(mySpace[i] == mySpace[j]){ i++;}
+                else if(mySpace[i] > mySpace[j]) {return 1;}
+                else if(mySpace[i] < mySpace[j]) {return -1;}
+                else return 1;
+            }
+        }
 
-        //                                          
-        return 0; // この行は変更しなければいけない。 
+        // return 0; // この行は変更しなければいけない。 
     }
 
     public void setSpace(byte []space) { 
