@@ -194,6 +194,17 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここに比較のコードを書け 
         //
+        
+        int rep = 0;
+        if (mySpace.length-suffixArray[i] > k-j) rep = k - j;
+        else rep = mySpace.length - suffixArray[i];
+        for (int l = 0; l < rep; l++) {
+            if (mySpace[suffixArray[i]+l] == myTarget[j+l]) continue;
+            else if (mySpace[suffixArray[i]+l] < myTarget[j+l]) return -1;
+            else return 1;
+        }
+        if (mySpace.length-suffixArray[i] >= k-j) return 0;
+        else return -1; 	
     }
 
 
@@ -226,8 +237,24 @@ public class Frequencer implements FrequencerInterface{
         // if target_start_end is "Ho ", it will return 6.                
         //                                                                          
         // ここにコードを記述せよ。                                                 
-        //                                                                         
-        return suffixArray.length; //このコードは変更しなければならない。          
+        //   
+        
+        int top = 0;
+        int bot = mySpace.length;
+        int pos = mySpace.length;
+        while(top <= bot) {
+            int mid = (top + bot) / 2;
+            if(mid < 0 || mySpace.length <= mid) break;
+            if(targetCompare(mid, start, end) == 0) {
+                pos = mid;
+                bot = mid-1;
+            } else if (targetCompare(mid, start, end) == 1) {
+                bot = mid - 1;
+            } else top = mid + 1;
+        }
+        return pos;    
+                                                                        
+        //このコードは変更しなければならない。          
     }
 
     private int subByteEndIndex(int start, int end) {
@@ -258,8 +285,24 @@ public class Frequencer implements FrequencerInterface{
         // if target_start_end is"i", it will return 9 for "Hi Ho Hi Ho".    
         //                                                                   
         //　ここにコードを記述せよ                                           
-        //                                                                   
-        return suffixArray.length; // この行は変更しなければならない、       
+        //   
+        
+        int top = 0;
+        int bot = mySpace.length;
+        int pos = mySpace.length;
+        while(top <= bot) {
+            int mid = (top + bot) / 2;
+            if(mid < 0 || mySpace.length <= mid) break;
+            if(targetCompare(mid, start, end) == 0) {
+                pos = mid + 1;
+                top = mid + 1;
+            } else if (targetCompare(mid, start, end) == 1) {
+                bot = mid - 1;
+            } else top = mid + 1;
+        }
+        return pos;                                         
+        
+        // この行は変更しなければならない、       
     }
 
 
