@@ -346,13 +346,29 @@ public class Frequencer implements FrequencerInterface{
             */
 
             frequencerObject.setTarget("H".getBytes());
-            //                                         
-            // ****  Please write code to check subByteStartIndex, and subByteEndIndex
-            //
-
             int result = frequencerObject.frequency();
             System.out.print("Freq = "+ result+" ");
             if(4 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+            
+            //                                         
+            // ****  Please write code to check subByteStartIndex, and subByteEndIndex
+            //      
+            
+            frequencerObject.setTarget("Ho Ho Ho Ho".getBytes());
+            result = frequencerObject.subByteStartIndex(0, 2);
+            System.out.print("Start = "+ result+" ");
+            if(5 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+            result = frequencerObject.subByteStartIndex(0, 3);
+            System.out.print("Start = "+ result+" ");
+            if(6 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+            
+            frequencerObject.setTarget("High_and_Low".getBytes());
+            result = frequencerObject.subByteEndIndex(0, 2);
+            System.out.print("End = "+ result+" ");
+            if(5 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+            result = frequencerObject.subByteEndIndex(1, 2);
+            System.out.print("End = "+ result+" ");
+            if(9 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
         }
         catch(Exception e) {
             System.out.println("STOP");
