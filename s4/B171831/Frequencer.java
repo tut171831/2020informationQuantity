@@ -2,7 +2,6 @@ package s4.B171831;
 import java.lang.*;
 import s4.specification.*;
 
-
 /*package s4.specification;
   public interface FrequencerInterface {     // This interface provides the design for frequency counter.
   void setTarget(byte  target[]); // set the data to search.
@@ -15,9 +14,6 @@ import s4.specification.*;
   // For the incorrect value of START or END, the behavior is undefined.
   }
 */
-
-
-
 public class Frequencer implements FrequencerInterface{
     // Code to start with: This code is not working, but good start point to work.
     byte [] myTarget;
@@ -26,15 +22,12 @@ public class Frequencer implements FrequencerInterface{
     boolean spaceReady = false;
 
     int []  suffixArray;
-
-
     // The variable, "suffixArray" is the sorted array of all suffixes of mySpace.                                    
     // Each suffix is expressed by a integer, which is the starting position in mySpace. 
                             
     // The following is the code to print the contents of suffixArray.
     // This code could be used on debugging.                                                                
 
-    //
     private void printSuffixArray() {
         if(spaceReady) {
             for(int i=0; i< mySpace.length; i++) {
@@ -49,7 +42,6 @@ public class Frequencer implements FrequencerInterface{
     }
 
     private int suffixCompare(int i, int j) {
-        //
         // comparing two suffixes by dictionary order.
         // suffix_i is a string starting with the position i in "byte [] mySpace".
         // When mySpace is "ABCD", suffix_0 is "ABCD", suffix_1 is "BCD", 
@@ -72,35 +64,47 @@ public class Frequencer implements FrequencerInterface{
 	    else return suffixCompare(i+1, j+1);
     }
 
-    public void setSpace(byte []space) { 
+    public void quick_sort(int[] d, int left, int right) {
+        if (left>=right) {
+            return;
+        }
+        int p = (left+right)/2;
+        int l = left, r = right, tmp;
+        while(l<=r) {
+            while(suffixCompare(d[l], d[p]) == -1) { l++; }
+            while(suffixCompare(d[r], d[p]) == 1) { r--; }
+            if (l<=r) {
+                tmp = d[l]; d[l] = d[r]; d[r] = tmp;
+                l++; r--;
+            }
+        }
+        quick_sort(d, left, r);
+        quick_sort(d, l, right);
+    }
 
+    public void setSpace(byte []space) {
         mySpace = space; if(mySpace.length>0) spaceReady = true;
         // First, create unsorted suffix array.
         suffixArray = new int[space.length];
         // put all suffixes in suffixArray.
         for(int i = 0; i< space.length; i++) {
-            suffixArray[i] = i; //      
+            suffixArray[i] = i;
         }
-        static void quick_sort(int[] d, int left, int right) {
-            if (left>=right) {
-                return;
-            }
-            int p = d[(left+right)/2];
-            int l = left, r = right, tmp;
-            while(l<=r) {
-                while(d[l] < p) { l++; }
-                while(d[r] > p) { r--; }
-                if (l<=r) {
-                    tmp = d[l]; d[l] = d[r]; d[r] = tmp;
-                    l++; r--;
+        
+        quick_sort(suffixArray, 0, space.length-1);
+
+        /*
+        for (int j = 0; j < space.length-1; j++){
+            for (int k = space.length-1; k > j; k--){
+                if(suffixCompare(suffixArray[k-1], suffixArray[k]) == 1){
+                    int tmp = suffixArray[k-1];
+                    suffixArray[k-1] = suffixArray[k];
+                    suffixArray[k] = tmp;
                 }
             }
-            quick_sort(d, left, r);  // ピボットより左側をクイックソート
-            quick_sort(d, l, right); // ピボットより右側をクイックソート
         }
-        quick_sort(data, 0, space.length-1);
+        */
     }
-
 
     public void setTarget(byte [] target) {
         myTarget = target; if(myTarget.length>0) targetReady = true;
@@ -137,7 +141,7 @@ public class Frequencer implements FrequencerInterface{
     }
 
     private int targetCompare(int i, int j, int k) {
-        // suffix_i is a string starting with the position i in "byte [] mySpace".
+       // suffix_i is a string starting with the position i in "byte [] mySpace".
         // When mySpace is "ABCD", suffix_0 is "ABCD", suffix_1 is "BCD", 
         // suffix_2 is "CD", and sufffix_3 is "D".
         // target_j_k is a string in myTarget start at j-th postion ending k-th position.
@@ -167,6 +171,7 @@ public class Frequencer implements FrequencerInterface{
         //            targetCompare should return 0;
         //    if suffix_i is "Ho Hi Ho", and suffix_j is "Ho", 
         //            suffixCompare should return -1.
+
         int rep = 0;
         if (mySpace.length-suffixArray[i] > k-j) rep = k - j;
         else rep = mySpace.length - suffixArray[i];
@@ -179,9 +184,7 @@ public class Frequencer implements FrequencerInterface{
         else return -1; 
     }
 
-
     private int subByteStartIndex(int start, int end) {
-
         /* Example of suffix created from "Hi Ho Hi Ho"
            0: Hi Ho
            1: Ho
@@ -243,7 +246,7 @@ public class Frequencer implements FrequencerInterface{
         // if start = 1, and end = 2, target_start_end is "i".
         // Assuming the suffix array is created from "Hi Ho Hi Ho",                   
         // if target_start_end is "Ho", it will return 7 for "Hi Ho Hi Ho".  
-        // Assuming the suffix array is created from "Hi Ho Hi Ho",          
+        // Assuming the suffix array is created from "Hi Ho Hi Ho",
         // if target_start_end is"i", it will return 9 for "Hi Ho Hi Ho".                                            
         //                                                                   
         int top = 0;
