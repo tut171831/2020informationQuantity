@@ -91,9 +91,8 @@ public class Frequencer implements FrequencerInterface{
             suffixArray[i] = i;
         }
         
-        quick_sort(suffixArray, 0, space.length-1);
+        //quick_sort(suffixArray, 0, space.length-1);
 
-        /*
         for (int j = 0; j < space.length-1; j++){
             for (int k = space.length-1; k > j; k--){
                 if(suffixCompare(suffixArray[k-1], suffixArray[k]) == 1){
@@ -103,7 +102,6 @@ public class Frequencer implements FrequencerInterface{
                 }
             }
         }
-        */
     }
 
     public void setTarget(byte [] target) {
