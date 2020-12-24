@@ -68,11 +68,11 @@ public class Frequencer implements FrequencerInterface{
         if (left>=right) {
             return;
         }
-        int p = (left+right)/2;
+        int p = d[(left+right)/2];
         int l = left, r = right, tmp;
         while(l<=r) {
-            while(suffixCompare(d[l], d[p]) == -1) { l++; }
-            while(suffixCompare(d[r], d[p]) == 1) { r--; }
+            while(suffixCompare(d[l], p) == -1) { l++; }
+            while(suffixCompare(d[r], p) == 1) { r--; }
             if (l<=r) {
                 tmp = d[l]; d[l] = d[r]; d[r] = tmp;
                 l++; r--;
@@ -90,18 +90,7 @@ public class Frequencer implements FrequencerInterface{
         for(int i = 0; i< space.length; i++) {
             suffixArray[i] = i;
         }
-        
-        //quick_sort(suffixArray, 0, space.length-1);
-
-        for (int j = 0; j < space.length-1; j++){
-            for (int k = space.length-1; k > j; k--){
-                if(suffixCompare(suffixArray[k-1], suffixArray[k]) == 1){
-                    int tmp = suffixArray[k-1];
-                    suffixArray[k-1] = suffixArray[k];
-                    suffixArray[k] = tmp;
-                }
-            }
-        }
+        quick_sort(suffixArray, 0, space.length-1);
     }
 
     public void setTarget(byte [] target) {
